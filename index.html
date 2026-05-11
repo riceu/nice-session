@@ -1,0 +1,304 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{max-width:580px;margin:0 auto;padding:1.5rem 1rem 3rem;font-family:var(--font-sans)}
+.logo{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.08em;text-transform:uppercase;padding-bottom:.85rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.75rem}
+.logo b{color:var(--color-text-primary);font-weight:500}
+.screen{display:none}
+.screen.on{display:block}
+.tag{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.45rem}
+.h1{font-size:21px;font-weight:500;color:var(--color-text-primary);line-height:1.35;margin-bottom:.35rem}
+.sub{font-size:13.5px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.4rem}
+.eq{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;margin-bottom:1.4rem}
+.pill{padding:.22rem .65rem;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:12px;color:var(--color-text-secondary)}
+.x{font-size:11px;color:var(--color-text-tertiary)}
+.prog-wrap{height:2px;background:var(--color-border-tertiary);border-radius:2px;margin-bottom:1.75rem;overflow:hidden}
+.prog{height:100%;background:#0D1B3E;border-radius:2px;transition:width .35s ease}
+.qnum{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem}
+.qtext{font-size:17px;font-weight:500;color:var(--color-text-primary);line-height:1.4;margin-bottom:.28rem}
+.qsub{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.1rem}
+.vtabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.75rem}
+.vtab{padding:.3rem .75rem;border-radius:20px;border:0.5px solid var(--color-border-secondary);font-size:12px;color:var(--color-text-secondary);cursor:pointer;background:var(--color-background-primary);transition:all .15s;position:relative}
+.vtab:hover{background:var(--color-background-secondary)}
+.vtab.av{background:#0D1B3E;color:#fff;border-color:#0D1B3E}
+.vtab .dk{width:6px;height:6px;border-radius:50%;background:#007A8A;position:absolute;top:3px;right:3px;display:none}
+.vtab.done .dk{display:block}
+.vtab.av.done .dk{background:#7DD3FC}
+.split-row{display:flex;gap:.3rem;flex-wrap:wrap;min-height:20px;margin-bottom:.65rem}
+.sc{padding:.15rem .5rem;border-radius:20px;font-size:11px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:var(--color-background-secondary)}
+.sc.diff{background:#FEF3C7;border-color:#D97706;color:#92400E}
+.opts{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.35rem}
+.opt{display:flex;align-items:flex-start;gap:.65rem;padding:.68rem .85rem;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);cursor:pointer;background:var(--color-background-primary);transition:all .12s}
+.opt:hover{background:var(--color-background-secondary)}
+.opt.sel{border-color:#0D1B3E;background:#EEF4FB}
+.ol{width:19px;height:19px;min-width:19px;border-radius:50%;border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--color-text-tertiary);margin-top:1px;flex-shrink:0}
+.opt.sel .ol{background:#0D1B3E;border-color:#0D1B3E;color:#fff}
+.ot{font-size:13px;color:var(--color-text-primary);line-height:1.5}
+.brow{display:flex;justify-content:space-between;align-items:center}
+.btn{padding:.5rem 1.1rem;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;transition:all .12s}
+.btn-p{background:#0D1B3E;color:#fff;border:none;opacity:.35}
+.btn-p.on{opacity:1}
+.btn-p.on:hover{opacity:.85}
+.btn-g{background:transparent;color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary)}
+.btn-g:hover{background:var(--color-background-secondary)}
+.rh{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.4rem;margin-top:1.5rem}
+.rt{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.35;margin-bottom:.3rem}
+.rb{font-size:13.5px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1rem}
+.hbox{border-left:2px solid #007A8A;padding:.7rem .9rem;background:var(--color-background-secondary);margin-bottom:1rem}
+.hlbl{font-size:10px;font-weight:500;color:#007A8A;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+.htxt{font-size:13px;color:var(--color-text-primary);line-height:1.65;font-style:italic}
+.tbox{background:#FFFBEB;border:0.5px solid #D97706;border-radius:var(--border-radius-md);padding:.8rem .9rem;margin-bottom:.85rem}
+.tlbl{font-size:10px;font-weight:500;color:#92400E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem}
+.ttxt{font-size:13px;color:#78350F;line-height:1.6}
+.clbl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.brow-g{margin-bottom:.7rem}
+.gr{display:flex;align-items:center;gap:.65rem;margin-bottom:.3rem}
+.gn{font-size:12px;color:var(--color-text-secondary);width:170px;min-width:170px}
+.gn.top{color:var(--color-text-primary);font-weight:500}
+.gt{flex:1;height:5px;background:var(--color-border-tertiary);border-radius:3px;overflow:hidden}
+.gf{height:100%;border-radius:3px;background:var(--color-border-secondary);transition:width 1s ease}
+.gf.top{background:#007A8A}
+.gp{font-size:11px;color:var(--color-text-tertiary);min-width:26px;text-align:right}
+.vc{display:flex;gap:.25rem;flex-wrap:wrap;margin-top:.2rem}
+.vch{padding:.1rem .45rem;border-radius:20px;font-size:10px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-tertiary)}
+.pcard{border:1.5px solid #007A8A;border-radius:var(--border-radius-lg);padding:1.1rem;margin-top:.75rem}
+.pname{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:.65rem}
+.ci{display:flex;gap:.45rem;margin-bottom:.38rem;align-items:flex-start}
+.cd{width:5px;height:5px;min-width:5px;border-radius:50%;background:#007A8A;margin-top:5px;flex-shrink:0}
+.ct{font-size:13px;color:var(--color-text-primary);line-height:1.55}
+.reset{font-size:12px;color:var(--color-text-tertiary);cursor:pointer;text-decoration:underline;margin-top:1.5rem;display:inline-block}
+</style>
+
+<div class="wrap">
+<div class="logo"><b>William Beasley</b> · Strategic Pricing · Discovery Session</div>
+
+<div class="screen on" id="s-intro">
+  <div class="tag">Pricing Discovery</div>
+  <div class="h1">Finding the balance.</div>
+  <div class="sub">Sustainable pricing lives at the intersection of three forces that constantly pull against each other. The goal isn't to pick one — it's to hold the center.</div>
+  <div class="eq">
+    <div class="pill">Customer value</div><div class="x">×</div>
+    <div class="pill">Financial goals</div><div class="x">×</div>
+    <div class="pill">Competitive position</div>
+  </div>
+  <div class="sub">Seven questions. No wrong answers. I'm listening for where the tension is — and where the biggest opportunity is.</div>
+  <button class="btn btn-p on" onclick="show('s-q');renderQ()">Begin <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+</div>
+
+<div class="screen" id="s-q">
+  <div class="prog-wrap"><div class="prog" id="prog"></div></div>
+  <div class="qnum" id="qnum"></div>
+  <div class="qtext" id="qtext"></div>
+  <div class="qsub" id="qsub"></div>
+  <div class="vtabs" id="vtabs"></div>
+  <div class="split-row" id="split"></div>
+  <div class="opts" id="opts"></div>
+  <div class="brow">
+    <button class="btn btn-g" id="bbk" onclick="goBack()">Back</button>
+    <button class="btn btn-p" id="bnx" onclick="goNext()">Next</button>
+  </div>
+</div>
+
+<div class="screen" id="s-result">
+  <div class="rh">Based on what I'm hearing</div>
+  <div class="rt" id="rt"></div>
+  <div class="rb" id="rb"></div>
+  <div class="hbox"><div class="hlbl">What I heard</div><div class="htxt" id="ht"></div></div>
+  <div id="tarea"></div>
+  <div class="clbl" style="margin-bottom:.6rem">Where the gaps are showing up</div>
+  <div id="gbars"></div>
+  <div class="pcard">
+    <div class="clbl">Where I'd focus first</div>
+    <div class="pname" id="pname"></div>
+    <div id="caps"></div>
+  </div>
+  <span class="reset" onclick="restart()">← Start over</span>
+</div>
+</div>
+
+<script>
+const ROLES=['CEO','CFO','Chief Product Officer','Sales Executive'];
+const L=['A','B','C','D'];
+
+const QS=[
+  {t:"When Sales loses a deal and says it was on price — what actually happens next?",
+   s:"Walk me through the process, or the lack of one.",
+   o:[{l:"We adjust the discount and move on — no formal debrief",sc:{G:2}},
+      {l:"We log it and review at a quarterly business review",sc:{I:2}},
+      {l:"Honestly, it depends on the rep — no consistent process",sc:{G:3}},
+      {l:"Win/loss feeds directly back into pricing strategy",sc:{A:1}}]},
+  {t:"How does a customer who gets ten times more value from your AI products show up differently on their invoice?",
+   s:"Your highest-adoption Mpower or Autopilot customer vs. an average one.",
+   o:[{l:"They don't — same seat price regardless of value extracted",sc:{A:3}},
+      {l:"We try to upsell them, but it's inconsistent deal-to-deal",sc:{A:2}},
+      {l:"There are consumption components but they vary by negotiation",sc:{G:2}},
+      {l:"We have a defined model that captures that difference",sc:{SE:1}}]},
+  {t:"When a new AI capability gets added to the portfolio — at what point does someone ask 'what do we charge for this?'",
+   s:"Be honest. Early, late, or somewhere in between?",
+   o:[{l:"Late — sometimes after the launch has already happened",sc:{SE:3}},
+      {l:"Finance gets involved pre-launch, but it's ad hoc each time",sc:{G:2}},
+      {l:"We have a stage-gate, but it isn't consistently followed",sc:{G:2}},
+      {l:"Pricing is embedded in the product development process",sc:{I:1}}]},
+  {t:"If I pulled your three best Sales reps in right now and asked them to explain CXone's AI pricing in one sentence — what would they say?",
+   s:"Not what you'd want them to say. What they'd actually say.",
+   o:[{l:"Three different things — no consistent answer across the team",sc:{SE:3}},
+      {l:"They'd describe features, not the value to the customer",sc:{A:2}},
+      {l:"They'd lead with the discount they have room to offer",sc:{G:2}},
+      {l:"A pretty consistent answer, with variation at the edges",sc:{SE:1}}]},
+  {t:"When Finance sets a margin target for an AI product — how does that number get pressure-tested against what customers will actually pay?",
+   s:"Walk me through how that conversation happens in practice.",
+   o:[{l:"It doesn't — Finance sets it and we work backward from there",sc:{A:3}},
+      {l:"Sales pushes back if it feels off, but there's no data behind it",sc:{I:2}},
+      {l:"We do competitive benchmarking to sanity-check the number",sc:{I:2}},
+      {l:"We have a willingness-to-pay research process",sc:{A:1}}]},
+  {t:"When you look at Genesys or Five9 on AI pricing — are you leading that conversation or responding to it?",
+   s:"No wrong answer. I'm listening for where the anchor is.",
+   o:[{l:"Mostly responding — we watch what they do and react",sc:{A:3}},
+      {l:"We try to lead, but the market moves fast",sc:{G:1,I:1}},
+      {l:"We benchmark them but price from our own value story",sc:{SE:1}},
+      {l:"We're defining the category — they follow us",sc:{A:1}}]},
+  {t:"Who has the authority to say no to a deal because the pricing is wrong?",
+   s:"Not in theory. In practice — who actually stops it?",
+   o:[{l:"Nobody really — it escalates but usually goes through",sc:{G:3}},
+      {l:"Finance technically, but they rarely block a deal",sc:{G:2}},
+      {l:"Deal Desk, but inconsistently applied across the team",sc:{SE:2}},
+      {l:"A clear escalation matrix that's actually followed",sc:{I:1}}]}
+];
+
+const PL={
+  A:{name:"Strategy & Architecture",
+     title:"The foundation needs resetting before anything else gets built.",
+     body:"The value metric is undefined or misaligned. Everything downstream — the sales motion, the governance, the analytics — is compensating for a gap that shouldn't exist.",
+     hearing:"The pricing model isn't keeping pace with value delivered. Customers who extract dramatically more from AI products aren't showing up differently in revenue. That's a structural misalignment — and it's the first thing I'd fix.",
+     caps:["Value metric definition — establishing what you actually charge on and why","Pricing architecture — seat base + consumption layer + outcome premium","Competitive value gap quantification — where NiCE's differentiation holds at the table"]},
+  G:{name:"Governance & Operations",
+     title:"The strategy exists. The system around it isn't protecting it.",
+     body:"Every deal becomes a negotiation. Every exception becomes a precedent. The model may be right — but without governance it drifts at the speed of Sales pressure.",
+     hearing:"I'm hearing that pricing decisions happen without a clear owner. Discounting is the de facto strategy. Authority is theoretical. The fix isn't a new model — it's the infrastructure that protects the one you have.",
+     caps:["Pricing Council — decision rights, monthly cadence, SOX compliance","Discount band architecture — guardrails Sales can work within, not around","Approval matrix & escalation — who says no, when, and what happens next"]},
+  SE:{name:"Systems & Enablement",
+      title:"The architecture is sound. It's not reaching the field.",
+      body:"A pricing strategy that Sales can't execute isn't a strategy — it's a document. The gap is in the translation layer between the model and the moment a rep is in front of a customer.",
+      hearing:"I'm hearing that the model exists but breaks down in execution. Reps are improvising. CPQ doesn't support the AI pricing motion. The customer experience of your pricing is inconsistent — and that has a clear fix.",
+      caps:["CPQ configuration — Mpower Agent consumption tiers in a quotable format","Sales enablement — TCO calculators, battlecards, Pricing Office Hours","Launch process — pricing embedded in the stage-gate before release"]},
+  I:{name:"Intelligence & Analytics",
+     title:"Decisions are being made without a feedback loop.",
+     body:"You're flying without instruments. The model may be working — or drifting — and right now there's no systematic way to know which.",
+     hearing:"I'm hearing that pricing decisions are informed by instinct and competitive reaction more than data. Win/loss patterns aren't feeding back into strategy. Realization isn't being tracked. The opportunity is building the intelligence layer.",
+     caps:["Price realization tracking — list vs. pocket price by segment and AI tier","Win/loss analysis — distinguishing price losses from positioning losses from rep losses","Churn & retention analysis — identifying where pricing is creating risk"]}
+};
+
+const PL_NAMES={A:"Strategy & Architecture",G:"Governance & Operations",SE:"Systems & Enablement",I:"Intelligence & Analytics"};
+
+let cq=0,av=0;
+let votes=QS.map(()=>ROLES.map(()=>null));
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');}
+
+function renderQ(){
+  const q=QS[cq];
+  document.getElementById('prog').style.width=Math.round((cq/QS.length)*100)+'%';
+  document.getElementById('qnum').textContent='Question '+(cq+1)+' of '+QS.length;
+  document.getElementById('qtext').textContent=q.t;
+  document.getElementById('qsub').textContent=q.s;
+  document.getElementById('bbk').style.visibility=cq===0?'hidden':'visible';
+  const allDone=votes[cq].every(v=>v!==null);
+  const nx=document.getElementById('bnx');
+  nx.textContent=cq===QS.length-1?'See results':'Next';
+  nx.classList.toggle('on',allDone);
+
+  const tabs=document.getElementById('vtabs');
+  tabs.innerHTML='';
+  ROLES.forEach((r,i)=>{
+    const d=document.createElement('div');
+    const done=votes[cq][i]!==null;
+    d.className='vtab'+(i===av?' av':'')+(done?' done':'');
+    d.innerHTML=r+'<span class="dk"></span>';
+    d.onclick=()=>{av=i;renderQ();};
+    tabs.appendChild(d);
+  });
+
+  const sp=document.getElementById('split');
+  const answered=votes[cq].map((v,i)=>v!==null?{r:ROLES[i],a:L[v]}:null).filter(Boolean);
+  if(!answered.length){sp.innerHTML='';}else{
+    const grp={};
+    answered.forEach(a=>{if(!grp[a.a])grp[a.a]=[];grp[a.a].push(a.r);});
+    const conflict=Object.keys(grp).length>1;
+    sp.innerHTML=Object.entries(grp).map(([a,rs])=>'<div class="sc'+(conflict?' diff':'')+'">'+a+': '+rs.join(', ')+'</div>').join('');
+  }
+
+  const oc=document.getElementById('opts');
+  oc.innerHTML='';
+  q.o.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt'+(votes[cq][av]===i?' sel':'');
+    d.innerHTML='<div class="ol">'+L[i]+'</div><div class="ot">'+o.l+'</div>';
+    d.onclick=()=>{
+      votes[cq][av]=i;
+      const nxt=votes[cq].findIndex(v=>v===null);
+      if(nxt!==-1)av=nxt;
+      renderQ();
+    };
+    oc.appendChild(d);
+  });
+}
+
+function goBack(){if(cq===0)return;cq--;av=0;renderQ();}
+
+function goNext(){
+  if(!votes[cq].every(v=>v!==null))return;
+  if(cq===QS.length-1){buildResult();return;}
+  cq++;
+  av=votes[cq].findIndex(v=>v===null);
+  if(av===-1)av=0;
+  renderQ();
+}
+
+function buildResult(){
+  show('s-result');
+  const tot={A:0,G:0,SE:0,I:0};
+  const vt=ROLES.map(()=>({A:0,G:0,SE:0,I:0}));
+  votes.forEach((qv,qi)=>qv.forEach((v,vi)=>{
+    if(v===null)return;
+    const sc=QS[qi].o[v].sc;
+    for(const k in sc){tot[k]+=sc[k];vt[vi][k]+=sc[k];}
+  }));
+
+  const sorted=Object.entries(tot).sort((a,b)=>b[1]-a[1]);
+  const topK=sorted[0][0];
+  const total=Math.max(1,Object.values(tot).reduce((a,b)=>a+b,0));
+  const p=PL[topK];
+
+  document.getElementById('rt').textContent=p.title;
+  document.getElementById('rb').textContent=p.body;
+  document.getElementById('ht').textContent=p.hearing;
+  document.getElementById('pname').textContent=p.name;
+
+  const voterTop=vt.map((v,i)=>({role:ROLES[i],top:Object.entries(v).sort((a,b)=>b[1]-a[1])[0][0]}));
+  const topKeys=[...new Set(voterTop.map(v=>v.top))];
+  const ta=document.getElementById('tarea');
+  if(topKeys.length>1){
+    const grp={};
+    voterTop.forEach(v=>{if(!grp[v.top])grp[v.top]=[];grp[v.top].push(v.role);});
+    const txt=Object.entries(grp).map(([k,rs])=>rs.join(' & ')+' see a '+PL_NAMES[k]+' gap').join(' — while ')+'. That tension is itself a data point worth discussing.';
+    ta.innerHTML='<div class="tbox"><div class="tlbl">Tension detected</div><div class="ttxt">'+txt+'</div></div>';
+  }else{ta.innerHTML='';}
+
+  const gb=document.getElementById('gbars');
+  gb.innerHTML='';
+  sorted.forEach(([k,v])=>{
+    const pct=Math.round((v/total)*100);
+    const isTop=k===topK;
+    const here=ROLES.filter((_,vi)=>Object.entries(vt[vi]).sort((a,b)=>b[1]-a[1])[0][0]===k);
+    gb.innerHTML+='<div class="brow-g"><div class="gr"><div class="gn'+(isTop?' top':'')+'">'+PL_NAMES[k]+'</div><div class="gt"><div class="gf'+(isTop?' top':'')+'" style="width:'+pct+'%"></div></div><div class="gp">'+pct+'%</div></div>'+(here.length?'<div class="vc">'+here.map(r=>'<div class="vch">'+r+'</div>').join('')+'</div>':'')+'</div>';
+  });
+
+  const cl=document.getElementById('caps');
+  cl.innerHTML=p.caps.map(c=>'<div class="ci"><div class="cd"></div><div class="ct">'+c+'</div></div>').join('');
+}
+
+function restart(){
+  cq=0;av=0;
+  votes=QS.map(()=>ROLES.map(()=>null));
+  show('s-intro');
+}
+</script>
